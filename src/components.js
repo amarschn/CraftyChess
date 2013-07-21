@@ -61,6 +61,6 @@ Crafty.c('Piece', {
 * - Image
 * - Movement
 * - Death
-*
+* - poop poop pooop
 *
 */
