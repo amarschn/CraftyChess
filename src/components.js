@@ -1,7 +1,5 @@
 
 
-
-
 Crafty.c('Grid', {
 	init: function() {
 		this.attr({
@@ -15,13 +13,29 @@ Crafty.c('Grid', {
 			x: x*Game.map_grid.tile.width,
 			y: y*Game.map_grid.tile.height
 		});
+		return this;
 	}
 });
 
-Crafty.c('WhiteTile', {
+Crafty.c('Selectable', {
 	init: function() {
-		this.requires('2D, Canvas, Grid, Color');
-		this.color('rgb(200, 200, 200)');
+		this.requires('Mouse');
+		this.selected = false;
+		this.bind('MouseDown', function() {
+			this.selected = true;
+			console.log("select");
+		})
+	}
+
+});
+
+Crafty.c('Tile', {
+	init: function() {
+		this.requires('2D, Canvas, Grid, Color, Selectable');
+	},
+	setColor: function(col) {
+		this.color(col);
+		return this;
 	}
 });
 
@@ -41,11 +55,10 @@ Crafty.c('GridLocation', {
 
 Crafty.c('Piece', {
 	init: function() {
-		
-		this.requires('2D, Canvas, GridLocation, Color');
+		this.requires('2D, Canvas, GridLocation, Color, Selectable, Test');
 		this.attr({
-			w: 5,
-			h: 5
+			w: 20,
+			h: 20
 		});
 		this.color('rgb(10, 10, 10)');
 	}
