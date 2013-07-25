@@ -42,9 +42,6 @@ Game = {
 				}
 			}
 		}
-	},
-	this.loop {
-		console.log("what");
 	}
 }
 
