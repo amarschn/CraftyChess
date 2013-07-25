@@ -1,5 +1,4 @@
 
-
 Crafty.c('Grid', {
 	init: function() {
 		this.attr({
@@ -20,23 +19,37 @@ Crafty.c('Grid', {
 Crafty.c('Selectable', {
 	init: function() {
 		this.requires('Mouse');
+		// Tells whether the piece has been selected or not
 		this.selected = false;
+
 		this.bind('MouseDown', function() {
-			this.selected = true;
-			console.log("select");
+			if (this.selected === false) {
+				this.selected = true;
+				this.setColor(this.red, this.green, 255);
+				console.log("select");
+			}
+			else {
+				console.log("already selected");
+			}
 		})
+	},
+
+	setColor: function(red, green, blue) {
+		this.color('rgb('+red+','+green+','+blue+')');
+		this.red = red;
+		this.green = green;
+		this.blue = blue;
+		return this;
 	}
+
 
 });
 
 Crafty.c('Tile', {
 	init: function() {
-		this.requires('2D, Canvas, Grid, Color, Selectable');
-	},
-	setColor: function(col) {
-		this.color(col);
-		return this;
+		this.requires('2D, Canvas, Grid, Color');
 	}
+
 });
 
 Crafty.c('GridLocation', {
@@ -50,6 +63,7 @@ Crafty.c('GridLocation', {
 			x: x*Game.map_grid.tile.width + x1,
 			y: y*Game.map_grid.tile.height + y1
 		});
+		return this;
 	}
 });
 
@@ -60,20 +74,10 @@ Crafty.c('Piece', {
 			w: 20,
 			h: 20
 		});
-		this.color('rgb(10, 10, 10)');
 	}
+	// move: function(x,y) {
+	// 	if (this.selected === true)
+	// }
 });
 
-/*
-* Need to make a player first
-*
-*
-*
-*
-* What are the components of a chess piece?
-* - Image
-* - Movement
-* - Death
-* - poop poop pooop
-*
-*/
+

@@ -30,19 +30,21 @@ Game = {
 		for (var x = 0; x < Game.map_grid.width; x++) {
 			for (var y = 0; y < Game.map_grid.height; y++) {
 				if (x%2 === 0 && y%2 !== 0 || x%2 !== 0 && y%2 === 0) {
-					Crafty.e("Tile").at(x, y).setColor('rgb(200,200,200)');
+					Crafty.e("Tile").at(x, y).color('rgb(200,200,200)');
 				}
 				if (x%2 !== 0 && y%2 !== 0 || x%2 === 0 && y%2 === 0) {
-					Crafty.e("Tile").at(x, y).setColor('rgb(100,100,100)');
+					Crafty.e("Tile").at(x, y).color('rgb(100,100,100)');
 				}
 
 				// Adds pieces to the top and bottom of the chessboard
 				if (y === 0 || y === 1 || y === 6 || y === 7) {
-					Crafty.e("Piece").at(x, y);
+					Crafty.e("Piece").at(x, y).setColor(10,10,10);
 				}
 			}
 		}
-
+	},
+	this.loop {
+		console.log("what");
 	}
 }
 
