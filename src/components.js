@@ -40,8 +40,12 @@ Crafty.c('Selectable', {
 		this.green = green;
 		this.blue = blue;
 		return this;
-	}
+	},
 
+	setUnselected: function() {
+		this.color('rgb(10, 10, 10)');
+		return this;
+	}
 
 });
 
@@ -69,15 +73,21 @@ Crafty.c('GridLocation', {
 
 Crafty.c('Piece', {
 	init: function() {
-		this.requires('2D, Canvas, GridLocation, Color, Selectable, Test');
+		this.requires('2D, Canvas, GridLocation, Color, Selectable, Draggable');
+		// Set the location of the piece, the z number allows the piece to be on top of the board
 		this.attr({
 			w: 20,
-			h: 20
+			h: 20,
+			z: 1
 		});
+		this.bind('MouseUp', function() {
+			console.log(this.x, this.y, Math.floor(this.x/Game.map_grid.tile.width), 
+				Math.floor(this.y/Game.map_grid.tile.height));
+			this.at(Math.floor(this.x/Game.map_grid.tile.width), 
+				Math.floor(this.y/Game.map_grid.tile.height));
+			this.setUnselected();
+		})
 	}
-	// move: function(x,y) {
-	// 	if (this.selected === true)
-	// }
 });
 
 
